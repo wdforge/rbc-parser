@@ -1,0 +1,21 @@
+{
+    "name": "wdforge/rbc-parser",
+    "require": {
+        "guzzlehttp/guzzle": "^7.2",
+        "symfony/console": "^4.1",
+	"iset-framework/utils":">=0.1-beta.3",
+	"iset-framework/service-manager":">=0.1-beta.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Generic\\": "lib",
+            "Parser\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dolgiy Yuriy",
+            "email": "wdforge@gmail.com"
+        }
+    ]
+}
