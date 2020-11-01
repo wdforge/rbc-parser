@@ -1,36 +1,33 @@
 <?php
 
-use Parser\Application;
-use Parser\ApplicationFactory;
 use Parser\Command\RbcShortNewsParseCommand;
-use Parser\Command\RbcFullNewsParseCommand;
 use Parser\Command\Factory\RbcShortNewsParserCommandFactory;
-use Parser\Command\Factory\RbcFullNewsParseCommandFactory;
 use Parser\Handler\FullNewsPage;
 use Parser\Handler\ShortNewsListPage;
 use Iset\App\Factory\HandlerFactory;
+use Iset\App\Factory\HttpApplicationFactory;
+use Iset\App\HttpApplication;
 
 /**
  * настройки проекта
  */
 return [
   'application' => [
-    'pipelines' => function (Application $app): void {
+    'pipelines' => function (HttpApplication $app): void {
     },
-    'class' => Application::class,
+    'class' => HttpApplication::class,
     'di' => [
       'invokables' => [
       ],
       'factories' => [
         /**
-         * Временное решение через фабрику, в будущем будет фабрика по типу и конфиги модуля
+         * Временное решение через фабрики, в будущем будет фабрика по типу и конфиги модуля
          * после чего данная конструкция будет убрана.
          */
         ShortNewsListPage::class => HandlerFactory::class,
         FullNewsPage::class => HandlerFactory::class,
-        Application::class => ApplicationFactory::class,
-        RbcShortNewsParseCommand::class => RbcShortNewsParserCommandFactory::class,
-        RbcFullNewsParseCommand::class => RbcFullNewsParseCommandFactory::class
+        HttpApplication::class => HttpApplicationFactory::class,
+        RbcShortNewsParseCommand::class => RbcShortNewsParserCommandFactory::class
       ],
     ],
   ],

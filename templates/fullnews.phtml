@@ -1,0 +1,8 @@
+<?php
+use Iset\Utils\StaticScope as Scope;
+$news = Scope::get('news')
+?>
+<h1><?=$news['title']?></h1>
+<?php if (!empty($news['image'])): ?><p><img src="<?=$news['image']?>"/></p><?php endif; ?>
+<p><?=$news['body']?></p>
+<p><?=$news['date']?></p>

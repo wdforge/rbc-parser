@@ -9,8 +9,7 @@ return [
    */
   'console' => [
     'commands' => [
-      \Parser\Command\RbcShortNewsParseCommand::class,
-      \Parser\Command\RbcFullNewsParseCommand::class
+      \Parser\Command\RbcShortNewsParseCommand::class
     ],
   ],
 

@@ -2,8 +2,9 @@
 
 namespace Parser\Model;
 
+use Iset\Utils\Logger;
 
-abstract class AbstractPdoModel
+class GenericPdoModel
 {
   /**
    * @var \PDO
@@ -17,7 +18,7 @@ abstract class AbstractPdoModel
    */
   public static function getConnect()
   {
-    return self::$dbh ? self::$dbh : self::initModel();
+    return self::$dbh;
   }
 
   /**
@@ -31,8 +32,8 @@ abstract class AbstractPdoModel
       try {
         $dbh = new \PDO($config['connect'], $config['user'], $config['pass'], [\PDO::ATTR_PERSISTENT => true]);
       } catch (\PDOException $e) {
-        echo("Error: " . $e->getMessage());
-        die();
+        Logger::Log("Error: " . $e->getMessage());
+        trigger_error($e->getMessage());
       }
 
       return $dbh;
@@ -60,13 +61,32 @@ abstract class AbstractPdoModel
           $result = $firstField ? $stmt->fetchAll(\PDO::FETCH_COLUMN) : $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
       } catch (\PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        error_log("Error: " . $e->getMessage());
-        die();
+        Logger::Log("Error: " . $e->getMessage());
+        trigger_error($e->getMessage());
       }
     }
 
     return $result;
+  }
+
+  /**
+   * Выполнение произвольного sql кода
+   *
+   * @param $sql
+   * @return false|\PDOStatement
+   */
+  public static function execute($sql)
+  {
+    if (!is_null(self::$dbh)) {
+      try {
+        return self::$dbh->exec($sql);
+      } catch (\PDOException $e) {
+        Logger::Log("Error: " . $e->getMessage());
+        trigger_error($e->getMessage());
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -100,10 +120,14 @@ abstract class AbstractPdoModel
           $stmt = self::$dbh->prepare($sqlInsert);
           $stmt->execute($data);
         } catch (\PDOException $e) {
-          error_log("Error: " . $e->getMessage());
+          echo "Error: " . $e->getMessage();
+          Logger::Log("Error: " . $e->getMessage());
           return false;
         }
         return true;
+      } else {
+        echo 'fuck!!!!!';
+        exit;
       }
       return false;
     };
@@ -132,7 +156,7 @@ abstract class AbstractPdoModel
       try {
         return self::$dbh->query($sqlDelete);
       } catch (\PDOException $e) {
-        error_log("Error: " . $e->getMessage());
+        Logger::Log("Error: " . $e->getMessage());
       }
     }
     return false;

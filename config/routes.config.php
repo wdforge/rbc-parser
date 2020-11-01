@@ -13,8 +13,7 @@ return [
    */
   'routes' => function (RouteCollector $r) {
     $r->get('/', ShortNewsListPage::class);
-    $r->get('/fullNews', FullNewsPage::class);
-
+    $r->get('/fullNews/{id:\d+}', FullNewsPage::class);
   },
 
 ];

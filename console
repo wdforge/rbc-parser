@@ -9,7 +9,7 @@ use Symfony\Component\Console\Application;
 $container = require __DIR__ . '/container.php';
 $application = new Application('RBC parser');
 $config = $container->get('config');
-$commands = $config->getConfig('console')['commands'];
+$commands = $config->get('console')['commands'];
 
 foreach ($commands as $command) {
     $application->add($container->createInstance($command, $config));

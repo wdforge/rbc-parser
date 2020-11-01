@@ -1,6 +1,6 @@
 <?php
 
-use Parser\Application;
+use Iset\App\HttpApplication as Application;
 use Iset\Utils\StaticScope as Scope;
 
 /**

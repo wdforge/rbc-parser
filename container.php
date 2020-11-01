@@ -8,6 +8,7 @@ use Iset\Utils\Config;
 use Iset\Di\Manager as Di;
 use Iset\Utils\FileList as Files;
 use Iset\Utils\StaticScope as Scope;
+use Parser\Model\GenericPdoModel;
 
 Scope::set('composer', $loader);
 
@@ -16,6 +17,9 @@ $config = (new Config)
   ->loadConfigs(
     Files::fromPath(__DIR__ . '/config')
   );
+
+// подключение к базе данных
+GenericPdoModel::connect($config->get('database'));
 
 // инициализация менеджера зависимостей
 $di = (new Di)->init($config);
