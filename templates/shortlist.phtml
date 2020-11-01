@@ -1,8 +1,7 @@
 <?php
 use Iset\Utils\StaticScope;
 ?>
-<h1>test</h1>
-
+<h1>Новости</h1>
 <?php foreach (StaticScope::get('newsList') as $news): ?>
-<a href="/fullNews/<?=$news['id']?>"><?=substr($news['body'], 0, 199).'...'?></a><br/>
+  <p><?=substr($news['body'], 0, 199).'...'?>&nbsp;<a href="/fullNews/<?=$news['id']?>">ПОДРОБНЕЕ</a></p><br/>
 <?php endforeach;?>
