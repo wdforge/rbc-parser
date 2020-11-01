@@ -6,7 +6,7 @@
     "iset-framework/utils": ">=0.1-beta.7",
     "iset-framework/event-manager": ">=0.1-beta.1",
     "iset-framework/service-manager": ">=0.2-beta.1",
-    "iset-framework/application": ">=0.1-beta.5"
+    "iset-framework/application": ">=0.1-beta.6"
   },
   "autoload": {
     "psr-4": {
