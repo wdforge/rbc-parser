@@ -21,5 +21,6 @@ $config = (new Config)
 $di = (new Di)->init($config);
 $config->set('application/di/manager', $di);
 $di->set('config', $config);
+Scope::set('config', $config);
 
 return $di;

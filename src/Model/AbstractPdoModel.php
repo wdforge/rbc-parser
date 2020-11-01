@@ -1,16 +1,14 @@
 <?php
 
-namespace Generic;
+namespace Parser\Model;
 
 
-class PdoModel
+abstract class AbstractPdoModel
 {
-
   /**
    * @var \PDO
    */
   private static $dbh;
-
 
   /**
    * Получение соединения
@@ -29,7 +27,6 @@ class PdoModel
    */
   public static function connect($config = [])
   {
-
     $connect = function () use ($config){
       try {
         $dbh = new \PDO($config['connect'], $config['user'], $config['pass'], [\PDO::ATTR_PERSISTENT => true]);

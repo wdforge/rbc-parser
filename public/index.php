@@ -1,11 +1,14 @@
 <?php
-/**
- * Код для вызова API проекта (вызов задач через Gearman)
- */
-$di = require_once __DIR__."/../container.php";
+
+use Parser\Application;
+use Iset\Utils\StaticScope as Scope;
 
 /**
- * вызов обработки приложения
+ * @var \Iset\Di\Manager $di
  */
-\Parser\Application::init($di);
-\Parser\Application::run();
+$di = require_once __DIR__ . "/../container.php";
+
+// инициализация приложения
+$di->createInstance(Application::class, Scope::get('config'), "application")
+  ->init()
+  ->run();

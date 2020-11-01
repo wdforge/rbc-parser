@@ -2,10 +2,16 @@
 
 namespace Parser;
 
-class Application extends \Generic\Application
+/**
+ * @method \Iset\Di\Manager
+ */
+class Application extends \Iset\App\HttpApplication
 {
-  public static function init() {
-    \Iset\Utils\Logger::$logfile = static::getConfig('logfile');
-    \Generic\PdoModel::connect(static::getConfig('database'));
+
+  public function init()
+  {
+//    \Generic\PdoModel::connect(self::getConfig('database'));
+    return parent::init();
   }
+
 }

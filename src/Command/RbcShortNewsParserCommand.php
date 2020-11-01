@@ -28,7 +28,7 @@ class RbcShortNewsParserCommand extends Command
 
   public function parse($html)
   {
-    if(preg_match_all("/<a[^>]+href=([\"']?)([^\\s\"']+)[^>]+class=\"news-feed__item[^>]+\\1/is", $html, $result, PREG_SET_ORDER)) {
+    if (preg_match_all("/<a[^>]+href=([\"']?)([^\\s\"']+)[^>]+class=\"news-feed__item[^>]+\\1/is", $html, $result, PREG_SET_ORDER)) {
       return $result[2];
     }
     return false;
